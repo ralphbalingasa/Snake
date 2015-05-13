@@ -28,7 +28,7 @@ void gotoxy(int x, int y);
 
 const int speedUp = 3;
 const int superFoodInstance = 5;
-#define snakeStartPos (6,12,1);		//fix this
+#define snakeStartPos 6,12,1
 
 char memory[80][25] = { ' ' };
 char currDisplay[80][25] = { ' ' };
@@ -177,7 +177,7 @@ void InitWorld()
 		}
 	}
 
-	theSnake = new Snake(6, 12, 1);		//create theSnake
+	theSnake = new Snake(snakeStartPos);		//create theSnake
 	theFood = new Food(1, 78, 3, 23);	//creat theFood
 	
 	//initial draw
