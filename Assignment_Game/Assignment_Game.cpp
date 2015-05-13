@@ -23,6 +23,7 @@ bool IsBendHit(int xPos, int yPos, std::list<Bend>::iterator iter);
 bool CheckWallHit();
 bool CheckBodyHit();
 void GameOverDisplay();
+void LoadScores();
 
 void gotoxy(int x, int y);
 
@@ -136,6 +137,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 }
 
+void LoadScores()
+{
+
+}
 void InitWorld()
 {
 	int x, y;
