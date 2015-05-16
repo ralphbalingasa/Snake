@@ -496,7 +496,6 @@ void UpdateHighScore()
 	if (Score > 0)
 	{
 		if (highScore.size() < 10){
-			//GetHighScoreName();
 			highScore.insert(std::make_pair(Score, GetHighScorerName()));
 		}
 		else if (highScore.size() == 10){
@@ -519,6 +518,7 @@ void UpdateHighScore()
 std::string GetHighScorerName(){
 	std::string name;
 	int letter;
+	int eraseX = 45;
 
 	RenderWorld();
 	gotoxy(35, 4);
@@ -534,13 +534,25 @@ std::string GetHighScorerName(){
 		{
 			name.append((const char*)&letter);
 			printf("%c", letter);
+			eraseX++;
 		}
 		else if (letter >= 97 && letter <= 122)	//small caps
 		{
 			name.append((const char*)&letter);
 			printf("%c", letter);
+			eraseX++;
 		}
-																//backspace function
+		else if (letter == 8)	//backspace
+		{
+			if (eraseX > 45)
+			{
+				gotoxy(eraseX-1, 10);
+				printf(" ");
+				eraseX--;
+				name.resize(name.size() - 1);
+				gotoxy(eraseX, 10);
+			}
+		}
 		else if (letter == 224)	//for arrow keys filter
 			_getch();
 	}
@@ -553,7 +565,6 @@ void GameOverDisplay(){
 	//reset
 	foodPoint = 0;
 	superFoodCtr = 0;
-	Score = 0;
 	scoreYPos = 7;
 	Speed = 150;
 
