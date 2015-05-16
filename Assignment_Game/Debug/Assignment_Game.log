@@ -1,0 +1,38 @@
+﻿Build started 5/16/2015 3:10:34 PM.
+     1>Project "C:\Users\Rap\Documents\GitHub\Snake\Assignment_Game\Assignment_Game.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Assignment_Game.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Assignment_Game.cpp
+         Assignment_Game.cpp
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(165): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(167): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(169): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(174): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(176): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(178): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(182): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(148): warning C4101: 'y' : unreferenced local variable
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(148): warning C4101: 'x' : unreferenced local variable
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(219): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(224): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(230): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(238): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(243): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(249): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(256): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(261): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(267): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(274): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(279): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(285): warning C4309: '=' : truncation of constant value
+     1>c:\users\rap\documents\github\snake\assignment_game\assignment_game.cpp(327): warning C4309: '=' : truncation of constant value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Rap\Documents\GitHub\Snake\Debug\Assignment_Game.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Rap\Documents\GitHub\Snake\Debug\Assignment_Game.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Rap\Documents\GitHub\Snake\Debug\Assignment_Game.lib" /MACHINE:X86 Debug\Assignment_Game.obj
+         Debug\Food.obj
+         Debug\Snake.obj
+         Debug\stdafx.obj
+         Assignment_Game.vcxproj -> C:\Users\Rap\Documents\GitHub\Snake\Debug\Assignment_Game.exe
+     1>Done Building Project "C:\Users\Rap\Documents\GitHub\Snake\Assignment_Game\Assignment_Game.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.58

@@ -4,12 +4,12 @@
 #include "stdafx.h"
 #include <Windows.h>
 #include <process.h>
-#include "conio.h"
-
+#include <conio.h>
+#include <map>
+#include <string>
 #include "Snake.h"
 #include "Food.h"
-
-#include<iostream>
+#include <iostream>
 
 void InitWorld();
 void DrawSnake(bool bDraw = true);
@@ -22,21 +22,25 @@ void RenderWorld();
 bool IsBendHit(int xPos, int yPos, std::list<Bend>::iterator iter);
 bool CheckWallHit();
 bool CheckBodyHit();
+std::string GetHighScorerName();
+void UpdateHighScore();
+void PrintScore();
 void GameOverDisplay();
-void LoadScore();
-
+void ClearDisplay();
 void gotoxy(int x, int y);
 
 const int speedUp = 3;
 const int superFoodInstance = 5;
-#define snakeStartPos 6,12,1
+#define snakeStartPos 6,12,1	//(x,y,direction)
 
 char memory[80][25] = { ' ' };
 char currDisplay[80][25] = { ' ' };
 int Score = 0;
+int scoreYPos = 7;
 int Speed = 150;
 int foodPoint;
 int superFoodCtr;
+std::multimap <int, std::string> highScore;
 Snake* theSnake = NULL;
 Food* theFood = NULL;
 Food* theSuperFood = NULL;
@@ -98,6 +102,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			Sleep(Speed);
 		}
 		GameOverDisplay();
+
 		while (true)
 		{
 			if (_kbhit() != 0)
@@ -127,6 +132,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				}
 			}
 		}
+
 	}
 	//deletes created objects
 	delete theSnake;
@@ -137,14 +143,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 }
 
-void LoadScore()
-{
-
-}
 void InitWorld()
 {
 	int x, y;
-
 	for (int y = 0; y < 25; y++)
 	{
 		for (int x = 0; x < 80; x++)
@@ -186,7 +187,7 @@ void InitWorld()
 	theFood = new Food(1, 78, 3, 23);	//creat theFood
 	
 	//initial draw
-	DrawSnake();
+	DrawSnake(true);
 	DrawFood();
 } 
 
@@ -338,7 +339,6 @@ void DrawSuperFood()
 
 bool UpdateWorld()
 {
-
 	UpdateScore(Score);
 	UpdateSnake();
 	if (CheckWallHit() || CheckBodyHit())
@@ -362,16 +362,20 @@ bool UpdateWorld()
 		foodPoint = 50;
 		theSuperFood = new Food(1, 79, 4, 23);	//theSuperFood only recieves ADDRESS; new creates SPACE for FOOD which returns the ADDRESS of FOOD
 		DrawSuperFood();
-		foodPoint = 100;
 		superFoodCtr++;
 	}
 	
 	if (theSuperFood != NULL)	//while super food is existing do not generate NEW superfood
 	{
+		gotoxy(69, 1);
+		printf("          ");	//delete timer
+		gotoxy(69, 1);
+		printf("Timer: %d",foodPoint);
 		if ((theSnake->headXPos == theSuperFood->foodXPos) && (theSnake->headYPos == theSuperFood->foodYPos))
 		{
 			theSnake->length++;
 			Score += (foodPoint/10);
+			gotoxy(68, 1);
 			superFoodCtr = 0;
 			delete theSuperFood;
 			theSuperFood = NULL;
@@ -383,16 +387,24 @@ bool UpdateWorld()
 		else if (foodPoint == 0)
 		{
 			memory[theSuperFood->foodXPos][theSuperFood->foodYPos] = ' ';
+			gotoxy(68, 1);
 			superFoodCtr = 0;
 			delete theSuperFood;
 			theSuperFood = NULL;
 		}
+
+		//delete the timer
+		if (theSuperFood == NULL)
+		{
+			gotoxy(69, 1);
+			printf("          ");
+		}
+
+		if (foodPoint > 0)
+			foodPoint--;
 	}
 
-	if (foodPoint > 0)
-		foodPoint--;
-
-	DrawSnake();
+	DrawSnake(true);
 	return true;
 }
 
@@ -414,7 +426,6 @@ void UpdateSnake()
 		theSnake->headXPos--;
 		break;
 	}
-
 }
 
 int UpdateScore(int Score)
@@ -474,7 +485,86 @@ void RenderWorld()
 	printf("Score: ");
 }
 
+void LoadScore()
+{
+
+}
+
+void UpdateHighScore()
+{
+	//record Score
+	if (Score > 0)
+	{
+		if (highScore.size() < 10){
+			//GetHighScoreName();
+			highScore.insert(std::make_pair(Score, GetHighScorerName()));
+		}
+		else if (highScore.size() == 10){
+			//check here if greater than last one
+			//GetHighScoreName();
+		}
+	}
+
+	//print Score
+	for (std::multimap<int, std::string>::reverse_iterator r_iter = highScore.rbegin(); r_iter != highScore.rend(); r_iter++)
+	{
+		gotoxy(31, scoreYPos);// coordinates of high score
+		printf("%d.) %s\t%d", scoreYPos - 6, r_iter->second.c_str(), r_iter->first);
+		scoreYPos++;
+	}
+
+	scoreYPos = 7;
+}
+
+std::string GetHighScorerName(){
+	std::string name;
+	int letter;
+
+	RenderWorld();
+	gotoxy(35, 4);
+	printf("HIGHSCORE!!!");
+	gotoxy(33, 10);
+	printf("Input Name: ");
+	while (true)
+	{
+		letter = _getch();
+		if (letter == 13)
+			break;
+		if (letter >= 65 && letter <= 90)	//all caps
+		{
+			name.append((const char*)&letter);
+			printf("%c", letter);
+		}
+		else if (letter >= 97 && letter <= 122)	//small caps
+		{
+			name.append((const char*)&letter);
+			printf("%c", letter);
+		}
+																//backspace function
+		else if (letter == 224)	//for arrow keys filter
+			_getch();
+	}
+
+	ClearDisplay();
+	return name;
+}
+
 void GameOverDisplay(){
+	//reset
+	foodPoint = 0;
+	superFoodCtr = 0;
+	Score = 0;
+	scoreYPos = 7;
+	Speed = 150;
+
+	ClearDisplay();
+	UpdateHighScore();
+	gotoxy(31, 4);
+	printf("Game Over [Y/N]?");
+	Score = 0;
+}
+
+void ClearDisplay(){
 	int x, y;
 
 	for (y = 3; y < 24; y++)
@@ -485,8 +575,6 @@ void GameOverDisplay(){
 			printf(" ");
 		}
 	}
-	gotoxy(31, 11);
-	printf("Game Over [Y/N]?");
 }
 
 void gotoxy(int x, int y){
