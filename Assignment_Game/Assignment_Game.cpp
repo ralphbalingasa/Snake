@@ -495,12 +495,16 @@ void UpdateHighScore()
 	//record Score
 	if (Score > 0)
 	{
-		if (highScore.size() < 10){
+		if (highScore.size() < 10){	// change back to 10
 			highScore.insert(std::make_pair(Score, GetHighScorerName()));
 		}
-		else if (highScore.size() == 10){
-			//check here if greater than last one
-			//GetHighScoreName();
+		else if (highScore.size() == 10){	//change back to 10
+			std::multimap <int, std::string>::iterator iter = highScore.begin();
+			if (Score > iter->first)
+			{
+				highScore.erase(iter);
+				highScore.insert(std::make_pair(Score, GetHighScorerName()));
+			}
 		}
 	}
 
@@ -512,7 +516,7 @@ void UpdateHighScore()
 		scoreYPos++;
 	}
 
-	scoreYPos = 7;
+	scoreYPos = 8;
 }
 
 std::string GetHighScorerName(){
@@ -521,8 +525,8 @@ std::string GetHighScorerName(){
 	int eraseX = 45;
 
 	RenderWorld();
-	gotoxy(35, 4);
-	printf("HIGHSCORE!!!");
+	gotoxy(35, 5);
+	printf("HIGH SCORE!!!");
 	gotoxy(33, 10);
 	printf("Input Name: ");
 	while (true)
@@ -570,8 +574,10 @@ void GameOverDisplay(){
 
 	ClearDisplay();
 	UpdateHighScore();
-	gotoxy(31, 4);
-	printf("Game Over [Y/N]?");
+	gotoxy(34, 4);
+	printf("Game Over?");
+	gotoxy(31, 5);
+	printf("Continue [Y/N]?");
 	Score = 0;
 }
 
